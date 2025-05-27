@@ -5,7 +5,6 @@ Trong thời đại chuyển đổi số, trí tuệ nhân tạo (AI) đang dầ
 <p align="center">
   <img src="images/Ingestion.jpg" alt="Biến đổi và lưu trữ dữ liệu" width="400"/>
 </p>
-![Biến đổi và lưu trữ dữ liệu](images/Ingestion.jpg)
 
 ## Luồng xử lý truy xuất tài liệu và sinh câu trả lời
 ![Kiến trúc RAG](images/RAG_pipeline.jpg)
