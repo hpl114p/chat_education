@@ -1,0 +1,83 @@
+THÔNG BÁO TUYỂN DỤNG 
+ THỰC TẬP SINH GENAI 
+ 
+I. MÔ TẢ CÔNG VIỆC 
+1. Prompt Engineering 
+➢​ Nghiên cứu, thiết kế, và tối ưu hóa prompt cho các mô hình AI sinh (Generative AI). 
+➢​ Thực hiện các thử nghiệm với các mô hình như OpenAI, Hugging Face để tối đa hóa 
+hiệu quả. 
+➢​ Tạo ra các giải pháp sáng tạo dựa trên nhu cầu thực tiễn của dự án. 
+2. Natural Language Processing (NLP) 
+➢​ Hỗ trợ phát triển các ứng dụng xử lý ngôn ngữ tự nhiên (NLP) như phân tích ngữ 
+nghĩa, tóm tắt văn bản, và sinh văn bản tự động. 
+➢​ Áp dụng các mô hình AI để xây dựng giải pháp thực tế, đáp ứng nhu cầu khách hàng. 
+➢​ Nghiên cứu, kiểm tra và tối ưu hóa hiệu suất của các mô hình NLP. 
+3. Phát triển Web Application (WebApp) 
+➢​ Hỗ trợ xây dựng và phát triển các ứng dụng web tích hợp công nghệ AI. 
+➢​ Tham gia thiết kế giao diện người dùng (UI) và tích hợp các API AI vào ứng dụng 
+web. 
+➢​ Đảm bảo hiệu suất tối ưu và trải nghiệm người dùng xuất sắc. 
+4. Lập trình Python 
+➢​ Xây dựng và triển khai các công cụ AI/ML sử dụng Python. 
+➢​ Tối ưu mã nguồn, cải thiện hiệu suất của các ứng dụng hiện tại. 
+➢​ Làm việc với các thư viện Python như TensorFlow, PyTorch, spaCy, NLTK hoặc các 
+framework như Flask, FastAPI. 
+Tầng 16, TASCO Phạm Hùng,                       
+Maxflow careers                           
+Huongdo@maxflowtech.com 
+        Mễ Trì Hạ, Nam Từ Liêm, Hà Nội Hình ảnh hiển thị một biểu tượng màu cam, được cách điệu thành chữ "W" với một mũi tên hướng lên tích hợp vào nét thẳng đứng bên phải của chữ, trên nền đen. Biểu tượng này có thể là logo hoặc một phần của logo của công ty đăng tuyển dụng, như "Maxflow careers" hoặc "Maxflowtech.com", nhằm đại diện cho sự phát triển, tiến bộ hoặc có thể liên quan đến việc "Phát triển Web Application (WebApp)" được liệt kê trong mô tả công việc. Biểu tượng định vị (location pin) màu cam này thường được sử dụng để chỉ dẫn địa điểm hoặc vị trí, cụ thể ở đây là địa chỉ làm việc của vị trí tuyển dụng Thực tập sinh GenAI tại Tầng 16, TASCO Phạm Hùng, Mễ Trì Hạ, Nam Từ Liêm, Hà Nội, như đã nêu trong thông báo tuyển dụng. Hình ảnh là một biểu tượng vuông, được kết xuất 3D, có khung kim loại màu xám nhạt bo tròn. Phần bên trong của biểu tượng có màu cam đồng nhất, hiển thị đường viền màu trắng của một phong bì đã được niêm phong ở trung tâm. Biểu tượng này trực quan hóa kênh liên lạc email được cung cấp trong phần "THÔNG BÁO TUYỂN DỤNG" để ứng viên có thể gửi hồ sơ hoặc liên hệ về vị trí "THỰC TẬP SINH GENAI" qua địa chỉ email Huongdo@maxflowtech.com. II. YÊU CẦU ỨNG VIÊN 
+1. Kỹ năng chuyên môn: 
+➢​ Có kiến thức cơ bản về lĩnh vực Generative AI hoặc NLP. 
+➢​ Thành thạo lập trình Python, ưu tiên các bạn đã có kinh nghiệm thực tế. 
+➢​ Hiểu biết cơ bản về phát triển web (HTML, CSS, JavaScript là một lợi thế). 
+➢​ Ưu tiên các ứng viên từng làm việc với các thư viện AI/NLP hoặc tích hợp API AI 
+vào dự án. 
+2. Kỹ năng mềm: 
+➢​ Tư duy logic tốt, khả năng giải quyết vấn đề sáng tạo. 
+➢​ Kỹ năng làm việc nhóm hiệu quả và tinh thần cầu tiến, học hỏi nhanh. 
+➢​ Thái độ làm việc tích cực, giao tiếp cởi mở.  
+III. QUYỀN LỢI ỨNG VIÊN 
+1.​ CHẾ ĐỘ LƯƠNG, THƯỞNG 
+➢​ Thu nhập:  Lương khởi điểm từ 5.000.000đ. Hoặc Deal lương theo năng lực thực 
+tế ứng viên.  
+➢​ Review chuyển đổi sang parttime hoặc chính thức sau thời gian hết hợp đồng thực 
+tập.  
+➢​ Xét đánh giá lương định kỳ 6 tháng/lần 
+➢​ Thưởng 6 tháng/lần cùng các kỳ review lương.  
+➢​ Trả lương đúng hạn trong mọi hoàn cảnh luôn là nguyên tắc bất di bất dịch tại 
+Maxflow 
+➢​ Tham gia BHXH, BHYT, BHTN theo quy định của Nhà nước khi trở thành nhân viên 
+chính thức 
+➢​ Thời gian làm việc: 8 buổi/tuần  
+➢​ Từ 09h00 - 18h30 (nghỉ trưa 1 tiếng 30 phút) 
+➢​                            Từ thứ 2 đến thứ 6 
+Tầng 16, TASCO Phạm Hùng,                       
+Maxflow careers                           
+Huongdo@maxflowtech.com 
+        Mễ Trì Hạ, Nam Từ Liêm, Hà Nội Hình ảnh hiển thị logo của công ty Maxflow, bao gồm một chữ 'W' cách điệu màu cam với một mũi tên hướng lên ở phía trên bên phải, tất cả nằm trên nền đen. Logo này đại diện cho công ty Maxflow, đơn vị đang tuyển dụng ứng viên cho vị trí được mô tả trong ngữ cảnh, với thông tin liên hệ "Maxflow careers" và địa chỉ email "Huongdo@maxflowtech.com" được đề cập. Biểu tượng ghim vị trí màu cam thể hiện địa điểm làm việc hoặc trụ sở của Maxflow, được nêu rõ trong phần quyền lợi ứng viên là "Tầng 16, TASCO Phạm Hùng, Mễ Trì Hạ, Nam Từ Liêm, Hà Nội". Hình ảnh là một biểu tượng 3D hình vuông màu cam với đường viền trắng, chứa một biểu tượng phong bì màu trắng ở trung tâm, thường được sử dụng để đại diện cho email hoặc tin nhắn. Biểu tượng này liên quan trực tiếp đến thông tin liên hệ được cung cấp trong văn bản, cụ thể là địa chỉ email "Huongdo@maxflowtech.com" của "Maxflow careers". Ứng viên quan tâm đến các yêu cầu về kỹ năng chuyên môn như kiến thức Generative AI hoặc NLP, thành thạo Python, và hiểu biết cơ bản về phát triển web, cũng như các kỹ năng mềm như tư duy logic và khả năng làm việc nhóm, có thể sử dụng địa chỉ email này để gửi hồ sơ ứng tuyển và tìm hiểu thêm về các quyền lợi như mức lương khởi điểm từ 5.000.000đ, chế độ review lương định kỳ, thưởng, và khả năng trở thành nhân viên chính thức tại địa chỉ Tầng 16, TASCO Phạm Hùng, Mễ Trì Hạ, Nam Từ Liêm, Hà Nội. 2.​ PHÚC LỢI: 
+➢​ Phụ cấp trang phục: Áo đồng phục 2 áo/cá nhân/năm hoặc thay đổi khi có Big Event 
+➢​ Teambuilding hàng năm để nâng cao tinh thần đội nhóm trong tổ chức - Công ty chi 
+trả 100% chi phí 
+➢​ Du lịch trong và ngoài nước - Công ty chi trả 100% chi phí 
+➢​ Khám sức khoẻ định kỳ hàng năm đăng ký cùng công ty hoặc khám riêng với mức hỗ 
+trợ 5.000.000đ/ người/ năm 
+➢​ Hỗ trợ chi phí rèn luyện thể dục thể thao tất cả các bộ môn: 50% tối đa 5.000.000đ/ 
+năm 
+➢​ Tham gia hoạt động bóng đá hàng tuần giao lưu nội bộ và các công ty khác trên địa 
+bàn 
+➢​ Được tài trợ kinh phí, tài nguyên để startup các dự án riêng 
+➢​ Môi trường làm việc thoải mái, trẻ trung, năng động 
+3.​ MÔI TRƯỜNG LÀM VIỆC- VĂN HÓA 
+➢​ Mỗi cá nhân hiểu rõ chức trách và nhiệm vụ của mình. 
+➢​ Luôn đề cao sự hợp tác và tinh thần đồng đội. 
+➢​ Khích lệ những ý tưởng sáng tạo, khởi động cho các dự án mới 
+IV.      THÔNG TIN ỨNG TUYỂN 
+❖​ Ứng viên gửi CV kèm sản phẩm từng làm (nếu có) qua email: 
+huongdo@maxflowtech.com với tiêu đề: [HỌ TÊN] - [Vị trí ứng tuyển]  
+❖​ Hoặc ứng viên có thể gọi theo số: 0918.579.663 (HR - Bộ phận Hợp Tác và Tuyển 
+Dụng) để được giải đáp các thắc mắc.  
+❖​ Địa điểm làm việc: Toà nhà TASCO, Phạm Hùng, Mễ Trì Hạ, Nam Từ Liêm, Hà Nội. 
+Tầng 16, TASCO Phạm Hùng,                       
+Maxflow careers                           
+Huongdo@maxflowtech.com 
+        Mễ Trì Hạ, Nam Từ Liêm, Hà Nội Hình ảnh hiển thị một logo với chữ "W" cách điệu màu cam trên nền đen, trong đó có một mũi tên hướng lên được tích hợp vào phía trên bên phải của chữ "W", biểu thị sự tăng trưởng và phát triển. Logo này có thể là đại diện của công ty Maxflow, đơn vị đang tuyển dụng và được nhắc đến trong phần thông tin ứng tuyển của ngữ cảnh. Một biểu tượng ghim vị trí (location pin) màu cam đơn giản, thường được sử dụng để chỉ một địa điểm hoặc địa chỉ cụ thể. Biểu tượng này minh họa cho thông tin về "Địa điểm làm việc" được nêu trong phần "IV. THÔNG TIN ỨNG TUYỂN", cho biết trụ sở làm việc là "Toà nhà TASCO, Phạm Hùng, Mễ Trì Hạ, Nam Từ Liêm, Hà Nội. Tầng 16, TASCO Phạm Hùng, Mễ Trì Hạ, Nam Từ Liêm, Hà Nội". Biểu tượng email là một hình ảnh trực quan thể hiện phương thức ứng tuyển được đề cập trong phần "THÔNG TIN ỨNG TUYỂN", trong đó ứng viên được hướng dẫn "gửi CV kèm sản phẩm từng làm (nếu có) qua email: huongdo@maxflowtech.com với tiêu đề: [HỌ TÊN] - [Vị trí ứng tuyển]". Hình ảnh là một biểu tượng phong bì màu trắng trên nền hình vuông màu cam, được bao quanh bởi một khung màu bạc/xám, nhấn mạnh kênh nộp hồ sơ chính là email.

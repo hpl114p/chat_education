@@ -4,7 +4,6 @@ import faiss
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
 from uuid import uuid4
-import os
 
 class FAISSVectorDBHandler:
     def __init__(
@@ -31,6 +30,7 @@ class FAISSVectorDBHandler:
         self.vector_store.save_local(self.path)
         print(f"Success add documents, vector store saved to: {self.path}")
 
-    
+
+
 
 

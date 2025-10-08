@@ -23,7 +23,7 @@ def read_document_json(path: str) -> dict:
         raise ValueError(f"Invalid JSON format in file: {path}")
 
 class RecursiveChucking:
-    def __init__(self, chunk_size=1000, chuck_overlap=100):
+    def __init__(self, chunk_size=512, chuck_overlap=64):
         self.MARKDOWN_SEPARATORS = [
             "\n\n\n",  # phân đoạn rất lớn (hiếm gặp, phòng trường hợp đặc biệt)
             "\n\n",    # phân đoạn theo phần lớn (ví dụ: I. THÔNG TIN CHUNG vs II. TUYỂN SINH ĐÀO TẠO)
@@ -32,8 +32,8 @@ class RecursiveChucking:
             " ",       # cuối cùng chia theo từ nếu không còn gì khác
         ]
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=350,  # The maximum number of characters in a chunk: we selected this value arbitrarily
-            chunk_overlap=50,  # The number of characters to overlap between chunks
+            chunk_size=chunk_size,  # The maximum number of characters in a chunk: we selected this value arbitrarily
+            chunk_overlap=chuck_overlap,  # The number of characters to overlap between chunks
             add_start_index=True,  # If `True`, includes chunk's start index in metadata
             strip_whitespace=True,  # If `True`, strips whitespace from the start and end of every document
             separators=self.MARKDOWN_SEPARATORS,
@@ -43,7 +43,7 @@ class RecursiveChucking:
         RAW_KNOWLEDGE_BASE = [
             Document(
                 page_content=doc["content"], 
-                metadata={"source": doc["link"], "title": doc["title"], "id": idx}
+                metadata={"source": doc["link"], "id": idx}
             )
             for idx, doc in enumerate(docs)
         ]
@@ -53,7 +53,7 @@ class RecursiveChucking:
             chucks = self.text_splitter.split_documents([doc])
             chucks = [
                 Document(
-                    page_content=chuck.metadata.get("title", "") + "\n" + chuck.page_content,
+                    page_content=chuck.page_content,
                     metadata=chuck.metadata
                 )
                 for chuck in chucks

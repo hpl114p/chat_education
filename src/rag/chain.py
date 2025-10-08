@@ -112,15 +112,17 @@ class QuestionAnsweringChain:
         self.extracted_links=[]
         self.memory = []
         self.date_impact=date_impact
+
         if apply_rerank:
             self.retriever = self.db.as_retriever(search_kwargs={"k": int(num_docs * 2.5)})
+            print("-- Initialize reranker namdp-ptit/ViRanker")
             self.reranker = FlagReranker('namdp-ptit/ViRanker', use_fp16=True)
         else:
             self.retriever = self.db.as_retriever(search_kwargs={"k": num_docs})
         self.output_parser = StrOutputParser()
         self.prompt_template = ChatPromptTemplate.from_template(
             """
-            Bạn là chatbot thông minh. Dựa vào những thông tin dưới đây để trả lời chi tiết câu hỏi, nếu không có dữ liệu liên quan đến câu hỏi, hãy trả lời 'Chúng tôi không có thông tin', ngoài ra có thể có 1 số câu hỏi không cần thôn tin dưới, hãy trả lời tự nhiên:
+            Bạn là chatbot thông minh. Dựa vào những thông tin dưới đây để trả lời chi tiết câu hỏi, nếu không có dữ liệu liên quan đến câu hỏi, hãy trả lời 'Chúng tôi không có thông tin', ngoài ra có thể có 1 số câu hỏi không cần thông tin dưới, hãy trả lời tự nhiên:
             {context}
 
             Lịch sử hội thoại:
@@ -132,7 +134,7 @@ class QuestionAnsweringChain:
 
         self.chain = self.create_chain(apply_rewrite=apply_rewrite, apply_rerank=apply_rerank)
 
-    def ReRank(self, query_docs):
+    def ReRank(self, query_docs, apply_date: bool = False):
         """
         Xếp hạng lại các tài liệu dựa trên điểm tương đồng và ngày tháng.
         
@@ -150,12 +152,18 @@ class QuestionAnsweringChain:
             normalize=True
         )
         chunk_with_rank = [(chunks[idx], scores[idx]) for idx in range(len(chunks))]
-        adjusted_docs = []
-        for doc, score in chunk_with_rank:
-            date_str = doc.metadata.get("date", "2024-12")
-            adjusted_score = apply_date_penalty(score, date_str, self.date_impact)
-            adjusted_docs.append((doc, adjusted_score))
-        top_chunks = heapq.nlargest(top_k, adjusted_docs, key=lambda x: x[1])
+
+        # Kiểm tra xem có áp dụng tính điểm ngày không
+        if apply_date:
+            adjusted_docs = []
+            for doc, score in chunk_with_rank:
+                date_str = doc.metadata.get("date", "2024-12")
+                adjusted_score = apply_date_penalty(score, date_str, self.date_impact)
+                adjusted_docs.append((doc, adjusted_score))
+            top_chunks = heapq.nlargest(top_k, adjusted_docs, key=lambda x: x[1])
+        else:
+            top_chunks = heapq.nlargest(top_k, chunk_with_rank, key=lambda x: x[1])
+
         return [chunk for chunk, score in top_chunks]
 
     def find_neighbor(self, docs : list[Document]):
@@ -172,7 +180,7 @@ class QuestionAnsweringChain:
         for doc in docs:    
             try:
                 doc_id = doc.metadata['id']
-                neighbor_ids = [doc_id - 2, doc_id - 1,doc_id, doc_id + 1, doc_id + 2]
+                neighbor_ids = [doc_id - 2, doc_id - 1, doc_id, doc_id + 1, doc_id + 2]
                 neighbors = self.db.get_by_ids(neighbor_ids)
                 if neighbors:
                     neighbors.append(doc)
@@ -180,7 +188,7 @@ class QuestionAnsweringChain:
                     doc.page_content = '.'.join([neighbor.page_content for neighbor in neighbors_sorted])
                 processed_docs.append(doc)
             except Exception as e:
-                print(f"Error processing neighbors for doc {doc_id}: {e}")
+                print(f"Error processing neighbors for doc")
                 processed_docs.append(doc)
         return processed_docs
 
@@ -197,8 +205,8 @@ class QuestionAnsweringChain:
         formatted = "\n\n".join(doc.page_content for doc in docs)
         self.extracted_links = []
         for doc in docs:
-            if doc.metadata.get("url", None):
-                self.extracted_links.append(doc.metadata.get("url", None))
+            if doc.metadata.get("source", None):
+                self.extracted_links.append(doc.metadata.get("source", None))
         return formatted
 
     def ReWrite(self, query):
@@ -302,7 +310,7 @@ class QuestionAnsweringChain:
         if str(response).strip() == '0':
             response = self.chain.invoke(question)
         else:
-            all_responses=list(response.split('\n'))
+            all_responses = list(response.split('\n'))
             if len(all_responses)>1:
                 final_response=[]
                 for res in all_responses:

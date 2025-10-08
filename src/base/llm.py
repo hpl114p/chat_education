@@ -16,3 +16,5 @@ response = llm.invoke(question)
 # In câu trả lời
 print(response)
 
+
+

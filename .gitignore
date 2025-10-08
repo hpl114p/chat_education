@@ -1,4 +1,4 @@
 .env.init
-data_source/data/faiss/
-data_source/data/docs/
+data_source/
+report/
 test/
