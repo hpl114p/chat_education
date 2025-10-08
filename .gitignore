@@ -1,4 +1,9 @@
 .env.init
 data_source/
 report/
+src/base/
+src/data_manager/collections/
+src/data_manager/raw_data/
+src/data_manager/vector_collections/
+src/rag/eval_ragas.py
 test/

@@ -1,42 +1,134 @@
 import streamlit as st
+from rag.chain import LLMHandler, VectorDatabase, QuestionAnsweringChain
+from rag.create_knowlegde import add_documents, add_docs_from_files
+from data_manager.web_crawler import auto_crawl
 import os
 import time
 from dotenv import load_dotenv
-# from pyngrok import ngrok
+from pathlib import Path
 
-# public_url = ngrok.connect(port = '80')
-# print(f"Please click on the text below {public_url}")
-
-# Tải biến môi trường
-load_dotenv(dotenv_path=r"B:\PROJECTS\CHATBOT_EDUCATION\.env.init")
-gemini_key = os.getenv("gemini_key")
-
-# Import các thành phần từ chain.py
-from rag.chain import LLMHandler, VectorDatabase, QuestionAnsweringChain
+parent_dir = Path(r"B:\PROJECTS\CHATBOT_EDUCATION\src\data_manager\vector_collections")
+subdirs = [d.name for d in parent_dir.iterdir() if d.is_dir()]
+# print(subdirs)
 
 # Cấu hình trang
 st.set_page_config(page_title="🐐💬 Gemini Chatbot (Streaming)")
-st.title("🐐💬 Assitant AI")
+st.title("💬 Assitant AI")
+
+# Hàm khởi tạo ứng dụng
+def initialize_app(path_faiss_index=r"B:\PROJECTS\CHATBOT_EDUCATION\data_source\data\faiss_v3"):
+    # Tải biến môi trường
+    load_dotenv(dotenv_path=r"B:\PROJECTS\CHATBOT_EDUCATION\.env.init")
+    gemini_key = os.getenv("gemini_generate")
+
+    # Khởi tạo các thành phần chỉ một lần
+    if "qa_chain" not in st.session_state:
+        llm_handler = LLMHandler(model_name="gemini-1.5-flash", gemini_key=gemini_key)
+        vector_db = VectorDatabase(path_faiss_index=path_faiss_index)
+        qa_chain = QuestionAnsweringChain(
+            llm_handler=llm_handler,
+            vector_db=vector_db,
+            num_docs=5,
+            apply_rewrite=False,
+            apply_rerank=False,
+            date_impact=0.01
+        )
+        st.session_state.qa_chain = qa_chain
 
 # Hàm xóa lịch sử chat
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Xin chào! Đây là HaUI Chatbot, trợ lý đắc lực dành cho bạn! Bạn muốn tìm kiếm thông tin về những gì?"}]
-    # st.session_state.chat_history = []
-    # st.session_state.references = []
 
+def handle_local_file():
+    """
+    Xử lý khi người dùng chọn tải file từ local
+    """
+    uploaded_file = st.file_uploader("Chọn file dữ liệu của bạn!")
+    if uploaded_file is not None:
+        with st.spinner("Đang tải dữ liệu..."):
+            try:
+                # Lưu file vào thư mục tạm
+                UPLOAD_DIR = r"B:\PROJECTS\CHATBOT_EDUCATION\src\data_manager\raw_data"
+                os.makedirs(UPLOAD_DIR, exist_ok=True)
 
+                file_name = uploaded_file.name
+                # file_name = os.path.splitext(uploaded_file.name)[0]
+                file_path = os.path.join(UPLOAD_DIR, file_name)
+                with open(file_path, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+
+                # Lưu vào faiss
+                add_docs_from_files(file_name=file_name)
+                st.success(f"Đã tải dữ liệu thành công vào collection '{file_name}'!")
+                subdirs.append(file_name)
+            except Exception as e:
+                st.error(f"Lỗi khi tải dữ liệu: {str(e)}")
+
+def handle_url_input():
+    """
+    Xử lý khi người dùng chọn crawl URL
+    """
+    collection_name = st.text_input(
+        "Tên collection trong Faiss:", 
+        "data_test",
+        help="Nhập tên collection bạn muốn lưu trong Faiss"
+    )
+
+    url = st.text_input("Nhập URL:", "https://www.stack-ai.com/docs")
+    
+    if st.button("Crawl dữ liệu"):
+        if not collection_name:
+            st.error("Vui lòng nhập tên collection!")
+            return
+            
+        with st.spinner("Đang crawl dữ liệu..."):
+            try:
+                auto_crawl(url, collection_name, 2, 2)
+                add_documents(file_name=collection_name)
+                st.success(f"Đã crawl dữ liệu thành công vào collection '{collection_name}'!")
+            except Exception as e:
+                st.error(f"Lỗi khi crawl dữ liệu: {str(e)}")
+    subdirs.append(collection_name)
 # Sidebar
 with st.sidebar:
     with st.sidebar:
-        tabs = st.tabs(["💬 Assitant", "⚙️ Cài đặt", "ℹ️ Thông tin"])
+        tabs = st.tabs(["💬 Chatbot", "⚙️ Cài đặt", "ℹ️ Thông tin"])
 
     with tabs[0]:
-        st.title("🐐💬 Assitant AI")
-        st.write("Xin chào! Mình là Assitant AI. Giúp bạn giải đáp thắc mắc, tra cứu thông tin một cách nhanh chóng và chính xác nhất!")
+        # st.title("🐐💬 AI Assistant")
+        st.write("Xin chào! Mình là AI Assistant. Giúp bạn giải đáp thắc mắc, tra cứu thông tin một cách nhanh chóng và chính xác nhất!")
+        # st.divider()
+        st.header("📚 Nguồn dữ liệu")
+        data_source = st.radio(
+            "Các nguồn giúp Assistant đưa ra câu trả lời dựa trên những thông tin quan trọng nhất đối với bạn.",
+            ["File Local", "URL trực tiếp"]
+        )
+
+        if data_source == "File Local":
+            handle_local_file()
+        else:
+            handle_url_input()
+
+        subdirs = [d.name for d in parent_dir.iterdir() if d.is_dir()]
+        st.divider()
+        st.header("Chọn cơ sở tri thức")
+        vector_source = st.radio(
+            "Chọn cơ sở tri thức bạn muốn sử dụng:",
+            subdirs
+        )
+        # print(vector_source)
+        path_faiss_index = os.path.join(r"B:\PROJECTS\CHATBOT_EDUCATION\src\data_manager\vector_collections", 
+                            f"{vector_source}")
+        print(path_faiss_index)
+
+        if st.button('Khởi tạo ứng dụng'):
+            initialize_app(path_faiss_index=path_faiss_index)
         st.button('🧹 Xóa lịch sử Chat', on_click=clear_chat_history)
 
     with tabs[1]:
         st.write("Bạn có thể tùy chỉnh các thiết lập tại đây (đang phát triển).")
+        st.divider()
+        st.button('Khởi tạo có sẵn', on_click=initialize_app)
 
     with tabs[2]:
         st.subheader("ℹ️ Thông tin")
@@ -69,35 +161,20 @@ with st.sidebar:
         Vì chatbot là một mô hình xác suất, nên vẫn có khả năng cung cấp thông tin không chính xác trong một số trường hợp. 
         Hãy kiểm chứng thông tin trước khi sử dụng hoặc liên hệ hỗ trợ để được giải đáp chính xác nhất.
         """)
-    
-# Khởi tạo phiên chatbot nếu chưa có
-if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Xin chào! Đây là HaUI Chatbot, trợ lý đắc lực dành cho bạn! Bạn muốn tìm kiếm thông tin về những gì?"}]
 
-# Khởi tạo các thành phần chỉ một lần
-if "qa_chain" not in st.session_state:
-    llm_handler = LLMHandler(model_name="gemini-1.5-flash", gemini_key=gemini_key)
-    vector_db = VectorDatabase(path_faiss_index=r"B:\PROJECTS\CHATBOT_EDUCATION\data_source\data\faiss_v3")
-    qa_chain = QuestionAnsweringChain(
-        llm_handler=llm_handler,
-        vector_db=vector_db,
-        num_docs=5,
-        apply_rewrite=False,
-        apply_rerank=False,
-        date_impact=0.01
-    )
-    st.session_state.qa_chain = qa_chain
+
+if "messages" not in st.session_state:
+    st.session_state.messages = [{"role": "assistant", "content": "Xin chào! Đây là Asistant AI, trợ lý đắc lực dành cho bạn! Bạn muốn tìm kiếm thông tin về những gì?"}]
 
 # Hiển thị lịch sử hội thoại
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# Nhận đầu vào từ người dùng
 if user_input := st.chat_input("Nhập câu hỏi của bạn tại đây..."):
     # Hiển thị ngay trên giao diện
     st.chat_message("user").markdown(user_input)
-    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.messages.append({"role": "user", "content": user_input}) 
 
     # Xử lý truy vấn
     response, links = st.session_state.qa_chain.run(user_input)
